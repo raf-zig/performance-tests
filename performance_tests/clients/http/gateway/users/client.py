@@ -2,7 +2,7 @@ from typing import TypedDict
 
 from httpx import Response
 
-from clients.http.client import HTTPClient
+from performance_tests.clients.http.client import HTTPClient
 
 
 class CreateUserRequestDict(TypedDict):

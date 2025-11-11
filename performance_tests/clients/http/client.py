@@ -1,4 +1,5 @@
 from httpx import Client, URL, Response, QueryParams
+from typing import Any
 
 
 class HTTPClient:
