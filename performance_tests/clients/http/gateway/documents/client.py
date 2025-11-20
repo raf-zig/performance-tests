@@ -25,6 +25,7 @@ class GetContractDocumentResponseDict(TypedDict):
     """
     contract: DocumentDict
 
+
 class DocumentsGatewayHTTPClient(HTTPClient):
     """
     Клиент для взаимодействия с /api/v1/documents сервиса http-gateway.
