@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict
 from enum import StrEnum
+from performance_tests.tools.fakers import fake
 
 class OperationType(StrEnum):
     """
@@ -75,8 +76,8 @@ class MakeOperationRequestSchema(BaseModel):
     """
     model_config = ConfigDict(populate_by_name=True)
 
-    status: OperationStatus
-    amount: float
+    status: OperationStatus = Field(default_factory=lambda: fake.enum(OperationStatus))
+    amount: int = Field(default_factory=lambda: fake.amount())
     card_id: str = Field(alias="cardId")
     account_id: str = Field(alias="accountId")
 
@@ -121,7 +122,7 @@ class MakeCashWithdrawalOperationResponseSchema(MakeOperationResponseSchema):
     pass
 
 class MakePurchaseOperationRequestSchema(MakeOperationRequestSchema):
-    category: str
+    category: str = Field(default_factory=lambda: fake.category())
 
 class MakePurchaseOperationResponseSchema(MakeOperationResponseSchema):
     pass
