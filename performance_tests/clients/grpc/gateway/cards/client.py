@@ -65,7 +65,7 @@ class CardsGatewayGRPCClient(GRPCClient):
         return self.issue_physical_card_api(request)
 
 
-def build_users_gateway_grpc_client() -> CardsGatewayGRPCClient:
+def build_cards_gateway_grpc_client() -> CardsGatewayGRPCClient:
     """
     Фабрика для создания экземпляра CardsGatewayGRPCClient.
 
