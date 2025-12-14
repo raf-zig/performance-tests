@@ -25,11 +25,7 @@ class OpenDebitCardAccountScenarioUser(HttpUser):
 
     @task
     def open_debit_card_account(self):
-        """
-        Основная нагрузочная задача: получение информации о пользователе.
-        Здесь мы выполняем POST-запрос к api/v1/accounts/open-debit-card-account{self.user_id}.
-        """
         self.client.post(
-            f"http://localhost:8003/api/v1/accounts/open-debit-card-account{self.user_id}",
-            name="api/v1/accounts/open-debit-card-account{self.user_id}"  # Явное указание имени группы запросов
+            "/api/v1/accounts/open-debit-card-account",
+            json={"userId": self.user_id}
         )

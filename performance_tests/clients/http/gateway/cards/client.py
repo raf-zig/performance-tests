@@ -5,8 +5,9 @@ from performance_tests.clients.http.gateway.cards.schema import (
     IssuePhysicalCardResponseSchema
 )
 from httpx import Response
-from performance_tests.clients.http.gateway.client import build_gateway_http_client
+from performance_tests.clients.http.gateway.client import build_gateway_http_client, build_gateway_locust_http_client
 from performance_tests.clients.http.client import HTTPClient
+from locust.env import Environment
 
 
 class CardsGatewayHTTPClient(HTTPClient):
@@ -49,3 +50,15 @@ def build_cards_gateway_http_client() -> CardsGatewayHTTPClient:
     :return: Готовый к использованию CardsGatewayHTTPClient.
     """
     return CardsGatewayHTTPClient(client=build_gateway_http_client())
+
+def build_cards_gateway_locust_http_client(environment: Environment) -> CardsGatewayHTTPClient:
+    """
+    Функция создаёт экземпляр CardsGatewayHTTPClient адаптированного под Locust.
+
+    Клиент автоматически собирает метрики и передаёт их в Locust через хуки.
+    Используется исключительно в нагрузочных тестах.
+
+    :param environment: объект окружения Locust.
+    :return: экземпляр CardsGatewayHTTPClient с хуками сбора метрик.
+    """
+    return CardsGatewayHTTPClient(client=build_gateway_locust_http_client(environment))
