@@ -1,5 +1,5 @@
-from locust import User, between, task
-
+from locust import task
+from performance_tests.tools.locust.user import LocustBaseUser
 # Импортируем схемы ответов, чтобы типизировать shared state
 from performance_tests.clients.http.gateway.accounts.schema import OpenDepositAccountResponseSchema
 from performance_tests.clients.http.gateway.locust import GatewayHTTPTaskSet
@@ -53,10 +53,8 @@ class GetAccountsTaskSet(GatewayHTTPTaskSet):
         )
 
 
-class GetAccountsScenarioUser(User):
+class GetAccountsScenarioUser(LocustBaseUser):
     """
     Пользователь Locust, исполняющий последовательный сценарий получения accounts.
     """
-    host = "localhost"
-    tasks = [GetAccountsTaskSet]
-    wait_time = between(1, 2)  # Имитируем паузы между выполнением сценариев
+    tasks = [GetAccountsTaskSet] # Имитируем паузы между выполнением сценариев
