@@ -30,7 +30,7 @@ class GetAccountsTaskSet(GatewayHTTPTaskSet):
     @task(2)
     def open_deposit_account(self):
         """
-        Открываем deposit счёт для созданного пользователя.
+        Открываем deposit счёт для созданного пользователя .
         Проверяем, что предыдущий шаг был успешным.
         """
         if not self.create_user_response:
