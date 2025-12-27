@@ -43,5 +43,5 @@ class IssuePhysicalCardSequentialTaskSet(GatewayHTTPSequentialTaskSet):
         )
 
 class IssuePhysicalCardScenarioUser(LocustBaseUser):
-    # Назначаем сценарий, который будет выполняться этим пользователем
+    # Назначаем сценарий, который будет выполняться этим пользователем.
     tasks = [IssuePhysicalCardSequentialTaskSet]
