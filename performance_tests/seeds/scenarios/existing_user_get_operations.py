@@ -17,7 +17,7 @@ class ExistingUserGetOperationsSeedsScenario(SeedsScenario):
         """
         return SeedsPlan(
             users=SeedUsersPlan(
-                count=300,  # Количество пользователей
+                count=30,  # Количество пользователей
                 credit_card_accounts=SeedAccountsPlan(
                     count=1,  # Количество счётов на пользователя
                     virtual_cards=SeedCardsPlan(count=1), # Количество физических карт
