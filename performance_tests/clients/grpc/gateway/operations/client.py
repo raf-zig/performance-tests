@@ -60,7 +60,7 @@ class OperationsGatewayGRPCClient(GRPCClient):
         """
         return  self.stub.GetOperations(request)
 
-    def get_operation_summary_api(self, request: GetOperationsSummaryRequest) -> GetOperationsSummaryResponse:
+    def get_operations_summary_api(self, request: GetOperationsSummaryRequest) -> GetOperationsSummaryResponse:
         """
         Низкоуровневый вызов метода GetOperationsSummary через gRPC.
 
@@ -147,10 +147,10 @@ class OperationsGatewayGRPCClient(GRPCClient):
         request = GetOperationsRequest(account_id=account_id)
         return self.get_operations_api(request)
 
-    def get_operation_summary(self, account_id: str) -> GetOperationsSummaryResponse:
+    def get_operations_summary(self, account_id: str) -> GetOperationsSummaryResponse:
 
         request = GetOperationsSummaryRequest(account_id=account_id)
-        return self.get_operation_summary_api(request)
+        return self.get_operations_summary_api(request)
 
     def make_fee_operation(self, account_id: str, card_id: str) -> MakeFeeOperationResponse:
 
