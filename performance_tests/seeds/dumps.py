@@ -1,7 +1,9 @@
 import os
 
 from performance_tests.seeds.schema.result import SeedsResult
+from performance_tests.tools.logger import get_logger
 
+logger = get_logger("SEEDS_SCENARIO")
 
 def save_seeds_result(result: SeedsResult, scenario: str):
     """
@@ -14,11 +16,11 @@ def save_seeds_result(result: SeedsResult, scenario: str):
     # Убедимся, что папка dumps существует
     if not os.path.exists("dumps"):
         os.mkdir("dumps")
-
+    seeds_file = f"./dumps/{scenario}_seeds.json"
     # Сохраняем результат сидинга в файл с именем {scenario}_seeds.json
     with open(f"./dumps/{scenario}_seeds.json", 'w+', encoding="utf-8") as file:
         file.write(result.model_dump_json())
-
+    logger.info(f"Seeding result saved to file: {seeds_file}")
 
 def load_seeds_result(scenario: str) -> SeedsResult:
     """
@@ -28,5 +30,8 @@ def load_seeds_result(scenario: str) -> SeedsResult:
     :return: Объект SeedsResult, восстановленный из файла.
     """
     # Открываем файл и валидируем его как объект SeedsResult
+    seeds_file = f"./dumps/{scenario}_seeds.json"
     with open(f'./dumps/{scenario}_seeds.json', 'r', encoding="utf-8") as file:
+        logger.info(f"Seeding result loaded from file: {seeds_file}")
         return SeedsResult.model_validate_json(file.read())
+
