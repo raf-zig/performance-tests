@@ -8,7 +8,7 @@ from httpx import Response
 from performance_tests.clients.http.gateway.client import build_gateway_http_client, build_gateway_locust_http_client
 from performance_tests.clients.http.client import HTTPClient
 from locust.env import Environment
-
+from performance_tests.tools.routes import APIRoutes
 
 class CardsGatewayHTTPClient(HTTPClient):
     """
@@ -22,7 +22,7 @@ class CardsGatewayHTTPClient(HTTPClient):
         :param request: Словарь с данными виртуальной карты пользователя.
         :return: Ответ от сервера (объект httpx.Response).
         """
-        return self.post(f"/api/v1/cards/issue-virtual-card", json=request.model_dump(by_alias=True))
+        return self.post(f"{APIRoutes.CARDS}/issue-virtual-card", json=request.model_dump(by_alias=True))
 
     def issue_physical_card_api(self, request: IssuePhysicalCardRequestSchema) -> Response:
         """
@@ -31,7 +31,7 @@ class CardsGatewayHTTPClient(HTTPClient):
         :param request: Словарь с данными физической карты пользователя.
         :return: Ответ от сервера (объект httpx.Response).
         """
-        return self.post("/api/v1/cards/issue-physical-card", json=request.model_dump(by_alias=True))
+        return self.post("{APIRoutes.CARDS}/issue-physical-card", json=request.model_dump(by_alias=True))
 
     def issue_virtual_card(self, user_id: str, account_id: str) -> IssueVirtualCardResponseSchema:
         request = IssueVirtualCardRequestSchema(userId=user_id, accountId=account_id)

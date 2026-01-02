@@ -14,7 +14,7 @@ from httpx import Response, QueryParams
 from performance_tests.clients.http.gateway.client import build_gateway_http_client, build_gateway_locust_http_client
 from performance_tests.clients.http.client import HTTPClient, HTTPClientExtensions
 from locust.env import Environment
-
+from performance_tests.tools.routes import APIRoutes
 
 class AccountsGatewayHTTPClient(HTTPClient):
     """
@@ -28,9 +28,9 @@ class AccountsGatewayHTTPClient(HTTPClient):
         :param query: Словарь с параметрами запроса, например: {'userId': '123'}.
         :return: Объект httpx.Response с данными о счетах.
         """
-        return self.get("/api/v1/accounts",
+        return self.get(APIRoutes.ACCOUNTS,
                         params=QueryParams(**query.model_dump(by_alias=True)),
-                        extensions=HTTPClientExtensions(route="/api/v1/accounts")
+                        extensions=HTTPClientExtensions(route=APIRoutes.ACCOUNTS)
                         )
 
     def open_deposit_account_api(self, request: OpenDepositAccountRequestSchema) -> Response:
@@ -40,7 +40,7 @@ class AccountsGatewayHTTPClient(HTTPClient):
         :param request: Словарь с userId.
         :return: Объект httpx.Response с результатом операции.
         """
-        return self.post("/api/v1/accounts/open-deposit-account", json=request.model_dump(by_alias=True))
+        return self.post(f"{APIRoutes.ACCOUNTS}/open-deposit-account", json=request.model_dump(by_alias=True))
 
     def open_savings_account_api(self, request: OpenSavingsAccountRequestSchema) -> Response:
         """
@@ -49,7 +49,7 @@ class AccountsGatewayHTTPClient(HTTPClient):
         :param request: Словарь с userId.
         :return: Объект httpx.Response.
         """
-        return self.post("/api/v1/accounts/open-savings-account", json=request.model_dump(by_alias=True))
+        return self.post(f"{APIRoutes.ACCOUNTS}/open-savings-account", json=request.model_dump(by_alias=True))
 
     def open_debit_card_account_api(self, request: OpenDebitCardAccountRequestSchema) -> Response:
         """
@@ -58,7 +58,7 @@ class AccountsGatewayHTTPClient(HTTPClient):
         :param request: Словарь с userId.
         :return: Объект httpx.Response.
         """
-        return self.post("/api/v1/accounts/open-debit-card-account", json=request.model_dump(by_alias=True))
+        return self.post(f"{APIRoutes.ACCOUNTS}/open-debit-card-account", json=request.model_dump(by_alias=True))
 
     def open_credit_card_account_api(self, request: OpenCreditCardAccountRequestSchema) -> Response:
         """
@@ -67,7 +67,7 @@ class AccountsGatewayHTTPClient(HTTPClient):
         :param request: Словарь с userId.
         :return: Объект httpx.Response.
         """
-        return self.post("/api/v1/accounts/open-credit-card-account", json=request.model_dump(by_alias=True))
+        return self.post(f"{APIRoutes.ACCOUNTS}/open-credit-card-account", json=request.model_dump(by_alias=True))
 
 
     def get_accounts(self, user_id: str) -> GetAccountsResponseSchema:
