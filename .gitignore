@@ -1,1 +1,13 @@
 __pycache__/
+# pycharm
+.idea
+
+# python
+.venv
+__pycache__
+
+# locust
+dumps
+locust_*.csv
+locust_*.json
+report.html

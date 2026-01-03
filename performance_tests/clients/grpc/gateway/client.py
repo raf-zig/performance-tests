@@ -1,6 +1,6 @@
 from grpc import Channel, insecure_channel, intercept_channel
 from locust.env import Environment
-from performance_tests.config import settings
+from config import settings
 from performance_tests.clients.grpc.interceptors.locust_interceptor import LocustInterceptor
 
 
@@ -11,6 +11,7 @@ def build_gateway_grpc_client() -> Channel:
     :return: gRPC-канал (Channel), настроенный на адрес localhost:9003.
     """
     # Создаём небезопасное (без TLS) соединение с gRPC-сервером по адресу localhost:9003
+
     return insecure_channel(settings.gateway_grpc_client.client_url)
 
 def build_gateway_locust_grpc_client(environment: Environment) -> Channel:

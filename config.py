@@ -1,5 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
+from functools import lru_cache
 # Импортируем вложенные модели
 from performance_tests.tools.config.grpc import GRPCClientConfig
 from performance_tests.tools.config.http import HTTPClientConfig
