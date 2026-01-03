@@ -72,6 +72,12 @@ jobs:
       - name: Run load tests and generate HTML report
         run: locust --config=${{ github.event.inputs.SCENARIO }} --html=./reports/${{ github.run_id }}/index.html
 
+  publish-report:
+    needs: [ run-tests ]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
       # 9. Деплой HTML-отчёта в GitHub Pages, чтобы можно было посмотреть результаты в браузере
       - name: Deploy HTML report to GitHub Pages
         if: always()
