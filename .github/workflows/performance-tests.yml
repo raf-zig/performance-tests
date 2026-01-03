@@ -95,7 +95,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: reports
-          path: ./reports/${{ github.run_id }}/index.html
+          path: ./reports/${{ github.run_id }}
       # 9. Деплой HTML-отчёта в GitHub Pages, чтобы можно было посмотреть результаты в браузере
       - name: Deploy HTML report to GitHub Pages
         if: always()
