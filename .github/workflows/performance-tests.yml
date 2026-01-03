@@ -73,8 +73,8 @@ jobs:
         run: locust --config=${{ github.event.inputs.SCENARIO }} --html=./reports/${{ github.run_id }}/index.html
 
   publish-report:
-    needs: [ run-tests ]
     if: always()
+    needs: [ run-tests ]
     runs-on: ubuntu-latest
 
     steps:
